@@ -1,0 +1,183 @@
+#root {
+  /* max-width: 1280px; */
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+body {
+  
+}
+
+/* .logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+} */
+
+.iconButt:hover{
+  background-color:#c5c5c5 !important;
+  transition: .2s !important;
+  box-shadow: 0 7px 7px rgba(0,0,0,.4);
+}
+
+.task{
+  transition: .2s  !important;}
+.task:hover{
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  box-shadow: 0 7px 7px rgba(0,0,0,.4);
+}
+
+
+.myDiv {
+  overflow-y: scroll;
+}
+
+
+.myDiv::-webkit-scrollbar {
+  width: 6px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.myDiv::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+.myDiv:hover::-webkit-scrollbar {
+  opacity: 1;
+}
+
+.myDiv::-webkit-scrollbar-thumb {
+  background: #888888; 
+  /* border-radius: 10px; */
+}
+
+.myDiv::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+/* alexandria fonts */
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-Thin.ttf");
+  font-weight: 100;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-ExtraLight.ttf");
+  font-weight: 200;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-Light.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-Medium.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-SemiBold.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-Bold.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-ExtraBold.ttf");
+  font-weight: 800;
+}
+@font-face {
+  font-family:alx;
+  src: url("/public/fonts/Alexandria-Black.ttf");
+  font-weight: 900;
+}
+/* cairo fonts */
+
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-ExtraLight.ttf");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-ExtraLight.ttf");
+  font-weight: 200;
+}
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-Light.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-Medium.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-SemiBold.ttf");
+  font-weight: 600;
+}
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-Bold.ttf");
+  font-weight: 700;
+}
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-ExtraBold.ttf");
+  font-weight: 800;
+}
+@font-face {
+  font-family:cairo;
+  src: url("/public/fonts/Cairo-Black.ttf");
+  font-weight: 900;
+}
