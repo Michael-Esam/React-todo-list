@@ -1,0 +1,23 @@
+{
+    "My Tasks":"مهامي",
+    "All":"الكل",
+    "Done":"المنجز",
+    "Pending":"غير المنجز",
+    "add":"اضافة",
+    "Title":"المهمة",
+    "Edit Task": "تعديل المهمة",
+    "Task Title": "عنوان المهمة",
+    "Details": "تفاصيل",
+    "Confirm": "تأكيد",
+    "Cancel": "إلغاء",
+    "Are you sure you want to delete the task?": "هل انت متأكد من حذف المهمة ؟",
+    "You can't undo after confirming deletion": "لا يمكنك التراجع بعد تأكيد الحذف",
+    "Arabic":"انجليزية",
+    "ltr":"rtl",
+    "start":"end",
+    "Deleted successfully":"تم الحذف بنجاح",
+    "Updated successfully": "تم التحديث بنجاح",
+    "Added successfully": "تمت الاضافة بنجاح",
+    "Edited successfully": "تم التعديل بنجاح"
+
+}

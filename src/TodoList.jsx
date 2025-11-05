@@ -37,6 +37,9 @@ import {
 import { TodoContext } from "./cotexts/TodoContext";
 import { useToast } from "./cotexts/ToastCotext"
 
+import { useTranslation } from 'react-i18next';
+import "../public/locales/ar/translation.json"
+
 
 export default function TodoList() {
   const [input, setInput] = useState("")
@@ -46,6 +49,8 @@ export default function TodoList() {
   const [openEdit, setOpenEdit] = useState(false);
   const {showToast}=useToast()
   const {todos,todosDispatch}= useContext(TodoContext)
+  const [lang , setLang] = useState("ar")
+  const { t, i18n } = useTranslation();
 
   const handleChange = (e) => {
     setSwitch(e.target.value);
@@ -54,6 +59,11 @@ export default function TodoList() {
   if(localStorage.getItem("todos")){
     useEffect(()=>{
      todosDispatch({type:"get"})
+  },[])}
+
+  if(localStorage.getItem("lang")){
+    useEffect(()=>{
+    setLang(localStorage.getItem("lang"))
   },[])}
 
 
@@ -68,16 +78,11 @@ export default function TodoList() {
   }
 
   const todo = render.map((t)=>{
-   return  <Todo key={t.id} todo={t} showDelete={showDelete} showEdit={showEdit} handelDelete={handelDelete}/>
+   return  <Todo  key={t.id} todo={t} showDelete={showDelete} showEdit={showEdit} handelDelete={handelDelete} lang={lang}/>
   })
 
-  function handleAdd (){
-    todosDispatch({type:"add",payload:{title:input}})
-      setInput("")
-      showToast("تمت الاضافة بنجاح")
-  }
-
-
+  
+  
   const [showScroll, setShowScroll] = useState(false);
   const scrollRef = useRef(null);
   useEffect(() => {
@@ -105,7 +110,7 @@ export default function TodoList() {
   function handelDelete (){
     todosDispatch({type:"delete",payload:Dtodo})
     handleClose()
-    showToast("تم الحذف بنجاح")
+    showToast(t("Deleted successfully"))
 }
 const handleClose = () => {
   setOpen(false);
@@ -117,7 +122,7 @@ const handleClose = () => {
   function handleSubmit (event){
     todosDispatch({type:"edit",payload:Dtodo})
     handleCloseEdit()
-  showToast("تم التحديث بنجاح")
+  showToast(t("Updated successfully"))
 }
 const handleCloseEdit = () => {
   setOpenEdit(false);
@@ -127,8 +132,21 @@ function showEdit (todo){
   setOpenEdit(true)
   setDtodo(todo)
 }
-  // end Edit dialog
+// end Edit dialog
+
+// change lang
+function changeLang (){
+    const newLang = lang === "en" ? "ar" : "en";
+    setLang(newLang);
+    i18n.changeLanguage(newLang); 
+    localStorage.setItem("lang",newLang)
+  }
   
+  function handleAdd (){
+    todosDispatch({type:"add",payload:{title:input}})
+      setInput("")
+      showToast(t("Added successfully"))
+  }
   return (
     <>
          <Dialog
@@ -136,20 +154,20 @@ function showEdit (todo){
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        style={{direction:"rtl"}}
+        style={{direction:t("ltr")}}
       >
         <DialogTitle id="alert-dialog-title">
-          {"هل انت متأكد من حذف المهمة ؟"}
+          {t("Are you sure you want to delete the task?")}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            لا يمكنك التراجع بعد تأكيد الحذف
+            {t("You can't undo after confirming deletion")}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>الغاء</Button>
+          <Button onClick={handleClose}>{t("Cancel")}</Button>
           <Button onClick={handelDelete} autoFocus>
-            تأكيد
+            {t("Confirm")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -158,9 +176,9 @@ function showEdit (todo){
         onClose={handleCloseEdit}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        style={{direction:"rtl"}}
+        style={{direction:t("ltr")}}
       >
-        <DialogTitle>تعديل المهمة</DialogTitle>
+        <DialogTitle>{t("Edit Task")}</DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit} id="subscription-form">
             <TextField
@@ -169,7 +187,7 @@ function showEdit (todo){
               margin="dense"
               id="name"
               value={Dtodo.title}
-              label="عنوان المهمة"
+              label={t("Task Title")}
               fullWidth
               variant="standard"
               onChange={(e)=>{setDtodo({...Dtodo , title:e.target.value})}}
@@ -179,7 +197,7 @@ function showEdit (todo){
               margin="dense"
               id="name"
               value={Dtodo.des}
-              label="تفاصيل"
+              label={t("Details")}
               fullWidth
               variant="standard"
               onChange={(e)=>{setDtodo({...Dtodo , des:e.target.value})}}
@@ -187,16 +205,17 @@ function showEdit (todo){
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseEdit}>الغاء</Button>
+          <Button onClick={handleCloseEdit}>{t("Cancel")}</Button>
           <Button type="submit" form="subscription-form">
-            تأكيد
+          {t("Confirm")}
           </Button>
         </DialogActions>
       </Dialog>
       <Container maxWidth="md" style={{ height: "fit-content" }}>
+      <Button variant="text" sx={{color:"white", width:"100%", display:"flex",justifyContent:t("start")}} onClick={changeLang}>{t("Arabic")}</Button>
         <Card sx={{ minWidth: 305  , height:"90vh" ,position:"relative"}}>
           <CardContent>
-            <Typography variant="h2" style={{fontWeight:"700"}}>مهامي</Typography>
+            <Typography variant="h2" style={{fontWeight:"700"}}>{t("My Tasks")}</Typography>
             <Divider component="" />
             <ToggleButtonGroup
               color="primary"
@@ -206,9 +225,9 @@ function showEdit (todo){
               aria-label="Platform"
               style={{marginTop:"30px",direction:"ltr"}}
               >
-              <ToggleButton value="non-checked">غير المنجز</ToggleButton>
-              <ToggleButton value="checked">المنجز</ToggleButton>
-              <ToggleButton value="all">الكل</ToggleButton>
+              <ToggleButton value="non-checked">{t("Pending")}</ToggleButton>
+              <ToggleButton value="checked">{t("Done")}</ToggleButton>
+              <ToggleButton value="all">{t("All")}</ToggleButton>
             </ToggleButtonGroup>
             <div className="myDiv"  ref={scrollRef}  style={{maxHeight:"48vh",overflow:"scroll",paddingTop:"5px", scrollbarColor: showScroll ? "#888 #f1f1f1" : "transparent transparent",}}>
             {todo}
@@ -216,7 +235,7 @@ function showEdit (todo){
           </CardContent>
           <Grid container spacing={1} style={{padding:"15px", textAlign:"left" , position:"absolute",left:"5px",bottom:"0",paddinBottom:"5px",backgroundColor:"white",width:"100%" }}>
             <Grid size={8}>
-            <TextField id="outlined-basic" label="المهمة" variant="outlined" 
+            <TextField id="outlined-basic" label={t("Title")} variant="outlined" 
               sx={{
                 width: "70%",
                 direction: "ltr",
@@ -232,7 +251,7 @@ function showEdit (todo){
               onChange={(e)=>{setInput(e.target.value)}}/>
             </Grid>
             <Grid size={4}>
-              <Button className="todo-btn" variant="contained" size="large" style={{width:"100%",padding:"14px",transition:".3s"}} onClick={handleAdd} disabled={input === ""}>اضافة</Button>
+              <Button className="todo-btn" variant="contained" size="large" style={{width:"100%",padding:"14px",transition:".3s"}} onClick={handleAdd} disabled={input === ""}>{t("add")}</Button>
             </Grid>
             </Grid>
         </Card>
