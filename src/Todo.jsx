@@ -48,7 +48,7 @@ export default function Todo({todo,showDelete,showEdit,lang}) {
           <Grid container spacing={1}>
             <Grid size={8}>
               <Typography variant="h5" sx={{ display:"flex",justifyContent:"start",textDecoration:todo.checked ? "line-through" :"none", transition:".3s" , color:todo.checked? "#ffffff91":"white"}}>{todo.title}</Typography>
-              <Typography variant="h6" sx={{textDecoration:todo.checked ? "line-through" :"none", transition:".3s" , color:todo.checked? "#ffffff91":"white"}}>{todo.des}</Typography>
+              <Typography variant="h6" sx={{display:"flex",justifyContent:"start",textDecoration:todo.checked ? "line-through" :"none", transition:".3s" , color:todo.checked? "#ffffff91":"white"}}>{todo.des}</Typography>
             </Grid>
             <Grid size={4}>
               <div style={{ display: "flex", alignItems: "center" ,justifyContent:"space-around",height:"100%"}}>
